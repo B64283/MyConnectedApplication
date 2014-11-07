@@ -5,13 +5,16 @@ package com.example.matthewdarke.myconnectedapplication;
   Java 1 week 4  *
     term 1410    *
 ******************/
+//new API key 92da859c4c0f2c95d0a5457e892e395a
+//id c6a500b2
+
+//API KEY dvxdFclkhb2sXHylgPh3fFjhz0q1FE84
 
 
-
-
-
-
+import com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser.RecipeJSONParser;
+import com.example.matthewdarke.myconnectedapplication.model.Recipe;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -33,10 +36,10 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-import javax.xml.transform.Result;
 
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends ListActivity {
     public String TAG = "------ SPDebug";
     TextView output;
     //isOnline connection;
@@ -46,20 +49,28 @@ public class MainActivity extends Activity {
     public ProgressBar pb;
     List<MyTask> tasks;
 
+    List<Recipe> recipeList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchBtn = (Button)findViewById(R.id.searchButton);
+        //searchBtn = (Button)findViewById(R.id.searchButton);
+
+
+
+
+
         //searchBtn.setOnClickListener(searchBtnClicked);
 
 
         //connection = new isOnLine(getApplicationContext());
         //Log.d(TAG,"onCreate");
-        output = (TextView) findViewById(R.id.textView);
-        output.setMovementMethod(new ScrollingMovementMethod());
+        //output = (TextView) findViewById(R.id.textView1);
+        //output.setMovementMethod(new ScrollingMovementMethod());
 
         pb = (ProgressBar) findViewById(R.id.progressBar2);
         pb.setVisibility(View.INVISIBLE);
@@ -89,7 +100,7 @@ public class MainActivity extends Activity {
         if (id == R.id.action_settings) {
 
             if (isOnLine()) {
-                requestData("http://api.bigoven.com/recipe/47725?api_key=dvxdFclkhb2sXHylgPh3fFjhz0q1FE84");
+                requestData("http://api.tvmaze.com/shows/1/episodes");
             } else {
                 Toast.makeText(this, "Network isnt available", Toast.LENGTH_LONG).show();
             }
@@ -109,9 +120,12 @@ public class MainActivity extends Activity {
     }
 
 
-    protected void updateDisplay(String message) {
+    protected void updateDisplay() {
+RecipeAdapter adapter = new RecipeAdapter(this, R.layout.item_recipe, recipeList);
+        setListAdapter(adapter);
 
-        output.append(message + "\n");
+
+
 
     }
 
@@ -140,7 +154,7 @@ public class MainActivity extends Activity {
         //has accsess to main thread
         @Override
         protected void onPreExecute() {
-            updateDisplay("starting task");
+           // updateDisplay("starting task");
 
             if (tasks.size() == 0) {
                 pb.setVisibility(View.VISIBLE);
@@ -163,7 +177,11 @@ public class MainActivity extends Activity {
         //has accsess to main thread
         @Override
         protected void onPostExecute(String result) {
-            updateDisplay(result);
+
+         recipeList = RecipeJSONParser.parseFeed(result);
+
+            updateDisplay();
+
             tasks.remove(this);
             if (tasks.size() == 0) {
                 pb.setVisibility(View.INVISIBLE);
@@ -175,7 +193,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onProgressUpdate(String... values) {
-            updateDisplay(values[0]);
+           // updateDisplay(values[0]);
         }
     }
 

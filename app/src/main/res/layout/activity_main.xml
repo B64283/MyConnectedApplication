@@ -12,37 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:id="@+id/editText"
-        android:layout_weight="1" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/searchButton"
-        android:layout_below="@+id/editText"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_weight="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar2"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Press for recipe"/>
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" "
-        android:id="@+id/textView"
-        android:layout_below="@+id/searchButton"
+        android:id="@android:id/list"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/searchButton"
-        android:layout_alignEnd="@+id/searchButton"
         android:scrollbars="vertical"
-        android:textSize="14pt" />
+        android:textSize="14pt"
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>
