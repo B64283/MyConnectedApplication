@@ -8,7 +8,8 @@ package com.example.matthewdarke.myconnectedapplication;
 //new API key 92da859c4c0f2c95d0a5457e892e395a
 //id c6a500b2
 
-//API KEY dvxdFclkhb2sXHylgPh3fFjhz0q1FE84
+////    http://api.tvmaze.com/shows/1/episodes
+
 
 
 import com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser.RecipeJSONParser;
