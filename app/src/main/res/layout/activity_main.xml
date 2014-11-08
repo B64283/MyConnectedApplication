@@ -39,7 +39,8 @@
         android:textSize="14pt"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/searchEntry"
-        android:background="#bbff00"/>
+        android:background="#bbff00"
+        android:orientation="horizontal"/>
 
     <Button
         android:layout_width="wrap_content"

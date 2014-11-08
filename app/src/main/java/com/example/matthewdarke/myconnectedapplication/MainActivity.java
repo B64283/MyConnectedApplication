@@ -12,10 +12,12 @@ package com.example.matthewdarke.myconnectedapplication;
 
 
 
+import com.example.matthewdarke.myconnectedapplication.Fragments.MasterFragment;
 import com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser.RecipeJSONParser;
 import com.example.matthewdarke.myconnectedapplication.model.Recipe;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ListFragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -40,8 +42,8 @@ import java.util.List;
 
 
 
-public class MainActivity extends ListActivity {
-    public String TAG = "------ SPDebug";
+public class MainActivity extends ListActivity  {
+    public String TAG = " My MainActivity";
     TextView output;
     //isOnline connection;
     Button searchBtn;
@@ -59,7 +61,7 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //searchBtn = (Button)findViewById(R.id.searchButton);
+        searchBtn = (Button)findViewById(R.id.searchButton);
 
 
 
@@ -113,6 +115,11 @@ public class MainActivity extends ListActivity {
         }
         return false;
     }
+
+
+
+
+
 
 
     private void requestData(String uri) {
