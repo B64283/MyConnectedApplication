@@ -1,6 +1,9 @@
 package com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser;
 
 import java.util.List;
+
+import com.example.matthewdarke.myconnectedapplication.Fragments.MasterFragment;
+import com.example.matthewdarke.myconnectedapplication.R;
 import com.example.matthewdarke.myconnectedapplication.model.Recipe;
 
 import org.json.JSONArray;
@@ -15,6 +18,8 @@ public class RecipeJSONParser {
 
     public static List<Recipe> parseFeed(String content) {
 
+
+
         try {
 
             JSONArray ar = new JSONArray(content);
@@ -25,10 +30,10 @@ public class RecipeJSONParser {
                 JSONObject obj = ar.getJSONObject(i);
                 Recipe recipe = new Recipe();
 
-                recipe.setId(obj.getInt("id"));
-                recipe.setName(obj.getString("name"));
-                recipe.setSeason(obj.getInt("season"));
-                recipe.setRuntime(obj.getInt("runtime"));
+                recipe.setmId(obj.getInt("id"));
+                recipe.setmName(obj.getString("name"));
+                recipe.setmSeason(obj.getInt("season"));
+                recipe.setmRuntime(obj.getInt("runtime"));
 
                 recipeList.add(recipe);
 

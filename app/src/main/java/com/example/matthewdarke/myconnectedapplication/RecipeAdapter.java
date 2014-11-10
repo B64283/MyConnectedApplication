@@ -34,18 +34,18 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+Recipe recipe = recipeList.get(position);
         LayoutInflater inflater =
                 (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_recipe, parent, false);
+        View view = inflater.inflate(R.layout.master_fragment, parent, false);
 
 
         // display recipe title in the widget
 
-Recipe recipe = recipeList.get(position);
+//Recipe recipe = recipeList.get(position);
         TextView tv = (TextView)view.findViewById(R.id.textView1);
         //TextView tv2 = (TextView)view.findViewById(R.id.textView5);
-        tv.setText(recipe.getName());
+        //tv.setText(recipe.getmName());
         //tv2.setText(recipe.getRuntime());
         //return view;
 

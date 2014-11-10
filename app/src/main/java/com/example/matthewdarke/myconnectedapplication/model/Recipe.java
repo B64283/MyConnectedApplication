@@ -6,42 +6,42 @@ package com.example.matthewdarke.myconnectedapplication.model;
 public class Recipe {
 
 
-    private String name;
-    private int season;
-    private int runtime;
-    private int id;
+    private String mName;
+    private int mSeason;
+    private int mRuntime;
+    private int mId;
 
 
-    public String getName() {
-        return name;
+    public String getmName() {
+        return mName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public int getSeason() {
-        return season;
+    public int getmSeason() {
+        return mSeason;
     }
 
-    public void setSeason(int season) {
-        this.season = season;
+    public void setmSeason(int mSeason) {
+        this.mSeason = mSeason;
     }
 
-    public int getRuntime() {
-        return runtime;
+    public int getmRuntime() {
+        return mRuntime;
     }
 
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
+    public void setmRuntime(int mRuntime) {
+        this.mRuntime = mRuntime;
     }
 
-    public int getId() {
-        return id;
+    public int getmId() {
+        return mId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setmId(int mId) {
+        this.mId = mId;
     }
 
 

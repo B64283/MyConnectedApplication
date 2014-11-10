@@ -1,21 +1,16 @@
 package com.example.matthewdarke.myconnectedapplication;
 
-/* ***************
-  Matthew Darke  *
-  Java 1 week 4  *
-    term 1410    *
-******************/
-//new API key 92da859c4c0f2c95d0a5457e892e395a
-//id c6a500b2
-
-////    http://api.tvmaze.com/shows/1/episodes
+//Matthew Darke Java 2 week 1
+//term 1411
 
 
 
+import com.example.matthewdarke.myconnectedapplication.Fragments.DetailFragment;
 import com.example.matthewdarke.myconnectedapplication.Fragments.MasterFragment;
 import com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser.RecipeJSONParser;
 import com.example.matthewdarke.myconnectedapplication.model.Recipe;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListActivity;
 import android.app.ListFragment;
 import android.content.Context;
@@ -42,8 +37,11 @@ import java.util.List;
 
 
 
-public class MainActivity extends ListActivity  {
-    public String TAG = " My MainActivity";
+public class  MainActivity extends ListActivity  {
+
+
+    public String TAG = "Main.TAG";
+    private MasterFragment masterFragment;
     TextView output;
     //isOnline connection;
     Button searchBtn;
@@ -55,25 +53,17 @@ public class MainActivity extends ListActivity  {
     List<Recipe> recipeList;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchBtn = (Button)findViewById(R.id.searchButton);
+if (savedInstanceState == null){
+    MasterFragment frag = new MasterFragment();
+    getFragmentManager().beginTransaction().replace(R.id.container1,frag, "MasterFrag")
+    .commit();
 
-
-
-
-
-        //searchBtn.setOnClickListener(searchBtnClicked);
-
-
-        //connection = new isOnLine(getApplicationContext());
-        //Log.d(TAG,"onCreate");
-        //output = (TextView) findViewById(R.id.textView1);
-        //output.setMovementMethod(new ScrollingMovementMethod());
+}
 
         pb = (ProgressBar) findViewById(R.id.progressBar2);
         pb.setVisibility(View.INVISIBLE);
@@ -122,6 +112,7 @@ public class MainActivity extends ListActivity  {
 
 
 
+
     private void requestData(String uri) {
         MyTask task = new MyTask();
         task.execute(uri);
@@ -129,7 +120,7 @@ public class MainActivity extends ListActivity  {
 
 
     protected void updateDisplay() {
-RecipeAdapter adapter = new RecipeAdapter(this, R.layout.item_recipe, recipeList);
+RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.R.layout.simple_list_item_1, recipeList);
         setListAdapter(adapter);
 
 
@@ -144,6 +135,9 @@ RecipeAdapter adapter = new RecipeAdapter(this, R.layout.item_recipe, recipeList
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        masterFragment = (MasterFragment)getFragmentManager().findFragmentById(R.id.container1);
+
 
 // this checks for two different states
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
@@ -211,36 +205,4 @@ RecipeAdapter adapter = new RecipeAdapter(this, R.layout.item_recipe, recipeList
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
