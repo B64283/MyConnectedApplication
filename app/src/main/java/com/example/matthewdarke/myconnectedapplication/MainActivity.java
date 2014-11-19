@@ -5,43 +5,32 @@ package com.example.matthewdarke.myconnectedapplication;
 
 
 
-import com.example.matthewdarke.myconnectedapplication.Fragments.DetailFragment;
-import com.example.matthewdarke.myconnectedapplication.Fragments.MasterFragment;
-import com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser.RecipeJSONParser;
-import com.example.matthewdarke.myconnectedapplication.model.Recipe;
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListActivity;
-import android.app.ListFragment;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.matthewdarke.myconnectedapplication.com.examplematthewdarke.myconnectedapplication.parser.RecipeJSONParser;
+import com.example.matthewdarke.myconnectedapplication.model.Recipe;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 
 
 
-public class  MainActivity extends ListActivity  {
-
-
-    public String TAG = "Main.TAG";
-    private MasterFragment masterFragment;
+public class MainActivity extends ListActivity  {
+    public String TAG = " My MainActivity";
     TextView output;
     //isOnline connection;
     Button searchBtn;
@@ -53,17 +42,44 @@ public class  MainActivity extends ListActivity  {
     List<Recipe> recipeList;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-if (savedInstanceState == null){
-    MasterFragment frag = new MasterFragment();
-    getFragmentManager().beginTransaction().replace(R.id.container1,frag, "MasterFrag")
-    .commit();
 
-}
+        Button searchButton = (Button) findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TextView recipeView = (TextView) findViewById(R.id.searchEntry);
+                //String recipe = recipeView.getText().toString();
+                try {
+                    if (isOnLine()) requestData("http://api.tvmaze.com/shows/1/episodes");
+                    else {
+                        //Toast.makeText(this, getString(networknotavailable), Toast.LENGTH_LONG).show();
+                    }
+
+
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid query for symbol: " );
+                }
+            }
+        });
+
+
+
+
+
+        //searchBtn.setOnClickListener(searchBtnClicked);
+
+
+        //connection = new isOnLine(getApplicationContext());
+        //Log.d(TAG,"onCreate");
+        //output = (TextView) findViewById(R.id.textView1);
+        //output.setMovementMethod(new ScrollingMovementMethod());
 
         pb = (ProgressBar) findViewById(R.id.progressBar2);
         pb.setVisibility(View.INVISIBLE);
@@ -112,7 +128,6 @@ if (savedInstanceState == null){
 
 
 
-
     private void requestData(String uri) {
         MyTask task = new MyTask();
         task.execute(uri);
@@ -120,7 +135,7 @@ if (savedInstanceState == null){
 
 
     protected void updateDisplay() {
-RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.R.layout.simple_list_item_1, recipeList);
+        RecipeAdapter adapter = new RecipeAdapter(this, R.layout.item_recipe, recipeList);
         setListAdapter(adapter);
 
 
@@ -135,9 +150,6 @@ RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-
-        masterFragment = (MasterFragment)getFragmentManager().findFragmentById(R.id.container1);
-
 
 // this checks for two different states
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
@@ -156,7 +168,7 @@ RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.
         //has accsess to main thread
         @Override
         protected void onPreExecute() {
-           // updateDisplay("starting task");
+            // updateDisplay("starting task");
 
             if (tasks.size() == 0) {
                 pb.setVisibility(View.VISIBLE);
@@ -171,7 +183,7 @@ RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.
         @Override
         protected String doInBackground(String... params) {
 
-          String content = HttpManager.getData(params[0]);
+            String content = HttpManager.getData(params[0]);
 
             return content;
         }
@@ -180,7 +192,7 @@ RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.
         @Override
         protected void onPostExecute(String result) {
 
-         recipeList = RecipeJSONParser.parseFeed(result);
+            recipeList = RecipeJSONParser.parseFeed(result);
 
             updateDisplay();
 
@@ -195,7 +207,7 @@ RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.
 
         @Override
         protected void onProgressUpdate(String... values) {
-           // updateDisplay(values[0]);
+            // updateDisplay(values[0]);
         }
     }
 
@@ -205,4 +217,22 @@ RecipeAdapter adapter = new RecipeAdapter(masterFragment.getActivity(), android.
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

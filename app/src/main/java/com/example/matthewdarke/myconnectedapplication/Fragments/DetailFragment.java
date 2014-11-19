@@ -1,6 +1,4 @@
 package com.example.matthewdarke.myconnectedapplication.Fragments;
-import com.example.matthewdarke.myconnectedapplication.model.Recipe;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -42,15 +40,15 @@ public class DetailFragment extends Fragment {
     public int iD;
 
 
-    public static DetailFragment newInstance(   ) {
+    public static DetailFragment newInstance( ) {
 
         DetailFragment frag = new DetailFragment();
 
 
-     //add bundle
+        //add bundle
         Bundle args = new Bundle();
 
-    //load arguments that are needed
+        //load arguments that are needed
 
 
 
@@ -61,7 +59,7 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-     View view = inflater.inflate(R.layout.detail_fragment, container, false);
+        View view = inflater.inflate(R.layout.detail_fragment, container, false);
 
 
         showName = (TextView) view.findViewById(R.id.textView2);
@@ -96,10 +94,11 @@ public class DetailFragment extends Fragment {
 
 
 
-      return view;
+        return view;
 
 
 
     }
+
 
 }
